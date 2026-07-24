@@ -4,6 +4,7 @@ from agents.memory import MemoryAgent
 from agents.tools import ToolAgent
 from agents.mcp import MCPAgent
 from agents.skills import SkillAgent
+from agents.native_tool import NativeToolAgent
 
 class AgentFactory: 
     # We register our available agent instancess in a static directory for o(1) lookup 
@@ -13,7 +14,8 @@ class AgentFactory:
         "memory": MemoryAgent(),
         "tools": ToolAgent(),
         "mcp": MCPAgent(),
-        "skills":SkillAgent()
+        "skills":SkillAgent(),
+        "native_tool":NativeToolAgent(),
     }
     @classmethod
     def get_agent(cls, mode:str) ->BaseAgent:

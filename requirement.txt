@@ -1,0 +1,18 @@
+# We import FastAPI as the core web framework to route our agent mode endpoints
+fastapi>=0.110.0
+
+# We include Uvicorn as the high-performance ASGI server required to execute and serve the FastAPI application
+uvicorn[standard]>=0.28.0
+
+# We use Pydantic for defining our strict ChatRequest and ChatResponse data validation schemas
+pydantic>=2.6.0
+
+# We add HTTPX as the asynchronous HTTP client needed for the MCPAgent to communicate with remote MCP servers
+httpx>=0.27.0
+
+# --- Optional LLM SDKs (Uncomment the one you choose to replace the simulated responses) ---
+# We include the OpenAI SDK for connecting to GPT models via standard chat completion APIs
+# openai>=1.14.0
+
+# We include the Google GenAI SDK to integrate Gemini models into the basic and tool agents
+# google-generativeai>=0.4.0

@@ -7,6 +7,7 @@ from agents.skills import SkillAgent
 from agents.native_tool import NativeToolAgent
 from agents.react import ReActAgent
 from agents.rag import RAGAgent
+from agents.swarm import SwarmAgent
 
 class AgentFactory: 
     # We register our available agent instancess in a static directory for o(1) lookup 
@@ -19,7 +20,8 @@ class AgentFactory:
         "skills":SkillAgent(),
         "native_tool":NativeToolAgent(),
         "react": ReActAgent(), 
-        "rag":RAGAgent()
+        "rag":RAGAgent(),
+        "swarm":SwarmAgent()
     }
     @classmethod
     def get_agent(cls, mode:str) ->BaseAgent:

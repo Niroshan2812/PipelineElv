@@ -11,7 +11,7 @@ async def run_cli():
 
     print("++++++++++++++++++++++++++++++ Moduler AI Agent CLI +++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     print ("\n")
-    print ("Commands: '/mode <name> (basic, memory, tools, mcp, skills, native_tool, react) | '/exit' to quit\n'")
+    print ("Commands: '/mode <name> (basic, memory, tools, mcp, skills, native_tool, react, rag) | '/exit' to quit\n'")
     print ("\n")
 
     # run infinite loop 
@@ -43,11 +43,11 @@ async def run_cli():
 
             #we validate the requested mode against our available factory classes 
 
-            if new_mode in ["basic", "memory", "tools", "mcp", "skills", "native_tool", "react"]:
+            if new_mode in ["basic", "memory", "tools", "mcp", "skills", "native_tool", "react","rag"]:
                 current_mode = new_mode
                 print(f"--> Switch activa agent to : [{current_mode.upper()}]\n")
             else:
-                print(f"--> Unknown mode '{new_mode}'. Options: basic, memory, tools, mcp, skills, native_tool, react\n ")
+                print(f"--> Unknown mode '{new_mode}'. Options: basic, memory, tools, mcp, skills, native_tool, react, rag\n ")
             continue
 
         # we retrive the appropreate agent insrance from our factory based on the acvite mode 

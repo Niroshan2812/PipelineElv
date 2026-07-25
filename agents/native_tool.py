@@ -31,6 +31,38 @@ class NativeToolAgent(MCPAgent):
                         "required": ["expression"]
                     }
                 }
+            },
+            # ---- second tool 
+
+             {
+                "type": "function",
+                "function": {
+                    "name": "file_manager",
+                    "description": "Creates, reads, writes, or deletes files in the sandbox.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "type": "string",
+                                "enum": ["create", "read", "write", "delete"],
+                                "description": "The file operation to perform."
+                            },
+                            "filename": {
+                                "type": "string",
+                                "description": "The name of the file (e.g., 'answer.txt')"
+                            },
+                            "content": {
+                                "type": "string",
+                                "description": "The text to write (only used for 'write' or 'create' actions)."
+                            },
+                            "confirm_delete": {
+                                "type": "boolean",
+                                "description": "Must be true if action is 'delete'."
+                            }
+                        },
+                        "required": ["action", "filename"]
+                    }
+                }
             }
         ]
     

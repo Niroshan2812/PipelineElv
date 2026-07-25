@@ -36,7 +36,7 @@ class ReActAgent(NativeToolAgent):
             )
             #if the ai did not call a tool, it may have finished it goal
             if isinstance(ai_responce,str) or not hasattr(ai_responce, "tool_calls") or not ai_responce.tool_calls:
-                
+
                 final_reply = ai_responce.content if hasattr(ai_responce,"content")else str(ai_responce)
                 self.history[session_id].append({"role":"assistant", "content":final_reply})
 
@@ -64,6 +64,21 @@ class ReActAgent(NativeToolAgent):
                 )
                 if "Math MCP" not in server_used:
                     server_used.append("Math MCP")
+            
+            elif function_name == "file_manager":
+                payload ={
+                    "action": arguments["action"],
+                    "filename": arguments["filename"],
+                    "content": arguments.get("content", ""),
+                    "confirm_delete": arguments.get("confirm_delete", False)
+
+                }
+                tool_data = await self._call_remote_server(
+                    self.file_server_url,
+                    payload
+                )
+                if "File MCP" not in server_used:
+                    server_used.append("File MCP")
 
             print (f"-> Observed result: {tool_data}")
                 

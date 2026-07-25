@@ -66,6 +66,26 @@ class ReActAgent(NativeToolAgent):
                     server_used.append("Math MCP")
             
             elif function_name == "file_manager":
+
+                if arguments ["action"] =="delete":
+                    print(f"\n [SECURITY ALERT]: The ai want to delete '{arguments['filename']}'.")
+                    human_approval = input("Type 'Y' to approve or 'N' to reject  ").strip().upper()
+
+                    if human_approval != "Y":
+                        print("-> Human reject the action. ")
+                        tool_data = "Error: the human user explicitly denied permission to delete this file. "
+
+                        self.history[session_id].append(ai_responce)
+                        self.history[session_id].append({
+                            "role": "tool",
+                            "tool_call_id": tool_call.id,
+                            "name": function_name,
+                            "content": tool_data
+                        })
+                        iteration_count += 1
+                        continue
+
+                    
                 payload ={
                     "action": arguments["action"],
                     "filename": arguments["filename"],

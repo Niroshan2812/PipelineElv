@@ -29,7 +29,7 @@ class SwarmAgent(MemoryAgent):
                             "agent_type": {
                                 "type": "string",
                                 "enum": ["react", "skills", "rag"],
-                                "description": "Which agent should handle this? 'react' for math/files, 'skills' for coding/data advice, 'rag' for memory retrieval."
+                                "description": "Use 'rag' if the user asks about past conversations, previous details, or things they told you earlier. Use 'react' for math/files..."
                             },
                             "instructions": {
                                 "type": "string",
@@ -47,14 +47,14 @@ class SwarmAgent(MemoryAgent):
         # we telll the LLM it is a manager and must delegate 
 
         message = [
-            {"role": "system", "content": "You are a Swarm Manager. You must use the delegate_task tool to route every request to the correct sub-agent."},
+            {"role": "system", "content": "You are a Swarm Manager. You MUST NOT answer the user's prompt yourself. You MUST use the delegate_task tool to route EVERY request to the correct sub-agent."},
             {"role": "user", "content": message}
         ]
 
         # call groq with our routing menu
         ai_responce = await self.llm_serivce.generate_response(message, tools=self.routing_schema)
 
-        if ai_responce.tool_calls:
+        if not isinstance(ai_responce, str) and hasattr(ai_responce, "tool_calls") and ai_responce.tool_calls:
             tool_call =ai_responce.tool_calls[0]
             args = json.loads(tool_call.function.arguments)
 

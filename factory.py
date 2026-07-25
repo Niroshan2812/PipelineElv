@@ -5,6 +5,7 @@ from agents.tools import ToolAgent
 from agents.mcp import MCPAgent
 from agents.skills import SkillAgent
 from agents.native_tool import NativeToolAgent
+from agents.react import ReActAgent
 
 class AgentFactory: 
     # We register our available agent instancess in a static directory for o(1) lookup 
@@ -16,6 +17,7 @@ class AgentFactory:
         "mcp": MCPAgent(),
         "skills":SkillAgent(),
         "native_tool":NativeToolAgent(),
+        "react": ReActAgent()
     }
     @classmethod
     def get_agent(cls, mode:str) ->BaseAgent:
